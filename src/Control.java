@@ -3,12 +3,17 @@
 // Date Created:09/03/2022
 // Description: honestly just making sure it works atm i'll do this later
 
+import javax.swing.*;  
+
 public class Control {
 	public static String[] fileaddresses = { "bob.txt", "happy.txt" };
 	public static String noprefix = null;
 
 	public static void main(String[] args) {
 
+		getui();
+		
+		
 		// in order to get an input array i intend to get the user to either drag and
 		// drop a folder into the window
 		// or open it from a folder which will give me the address location
@@ -50,5 +55,25 @@ public class Control {
 			System.out.println("Your files have something in common!!");
 		}
 
+	}
+	/**
+	 *  this initialises the ui interface such as the buttons the file explorer
+	 *  
+	 */
+	public static void getui()
+	{
+		JFrame f=new JFrame("Topic Modeller");//creating instance of JFrame  
+		
+		JButton b=new JButton("Add File");//creating instance of JButton  
+		b.setBounds(50,400,100, 40);//x axis, y axis, width, height 
+		
+		JButton a=new JButton("Examine");//creating instance of JButton  
+		a.setBounds(200,400,100, 40);//x axis, y axis, width, height  
+		          
+		f.add(b);//adding button in JFrame  
+		f.add(a);//adding button in JFrame  
+		f.setSize(400,500);//400 width and 500 height  
+		f.setLayout(null);//using no layout managers  
+		f.setVisible(true);//making the frame visible 
 	}
 }

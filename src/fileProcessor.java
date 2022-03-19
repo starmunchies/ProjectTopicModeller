@@ -37,6 +37,8 @@ public class fileProcessor {
 
 				while (myReader.hasNext()) {
 					String check = myReader.next();
+					check = check.replace(".", "");
+					check = check.replace(",", "");
 
 					fileoutput.add(check.toLowerCase());
 					
