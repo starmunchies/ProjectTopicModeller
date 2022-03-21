@@ -61,7 +61,7 @@ public class intersect {
 	 * @return
 	 */
 	public String getIntersection() {
-		intersection = null;
+		
 
 		for (String i : intersectionSet) {
 

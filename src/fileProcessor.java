@@ -27,7 +27,7 @@ public class fileProcessor {
 		// send it off to be sorted
 		// and return the top ten from the array list
 
-		ArrayList<String> fileoutput = new ArrayList<String>();
+		ArrayList<String> fileOutput = new ArrayList<String>();
 
 		File unprocessed = new File(file);
 		if (unprocessed.exists() == true) {
@@ -37,18 +37,26 @@ public class fileProcessor {
 
 				while (myReader.hasNext()) {
 					String check = myReader.next();
+					// get rid of special characters
 					check = check.replace(".", "");
 					check = check.replace(",", "");
+					check = check.replace("[", "");
+					check = check.replace("]", "");
+					check = check.replace("(", "");
+					check = check.replace(")", "");
+					check = check.replace("%", "");
+					check = check.replace("&", "");
+					check = check.replace("?", "");
 
-					fileoutput.add(check.toLowerCase());
+					fileOutput.add(check.toLowerCase());
 					
 
 				}
 				myReader.close();
-				ArrayList<String> strippedtext = stripFile(fileoutput);
+				ArrayList<String> strippedText = stripFile(fileOutput);
 				
 				
-				Map<String, Integer> dictionary = wordFrequency(strippedtext);
+				Map<String, Integer> dictionary = wordFrequency(strippedText);
 				
 				ArrayList<String> result = getOrder(dictionary);
 				//System.out.println(result);
@@ -85,15 +93,15 @@ public class fileProcessor {
 	public ArrayList<String> getOrder(Map<String, Integer> dictionary) {
 		ArrayList<String> result = new ArrayList<String>();
 		
-		LinkedHashMap<String, Integer> newsortedMap = dictionary.entrySet().stream()
+		LinkedHashMap<String, Integer> newSortedMap = dictionary.entrySet().stream()
 				  .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
 				  .collect(Collectors.toMap(Map.Entry::getKey,
 				                            Map.Entry::getValue,
 				                            (keyname, keyvalues) -> keyname, LinkedHashMap::new));
 		
-		System.out.println(newsortedMap.entrySet());
+		System.out.println(newSortedMap.entrySet());
 	
-		for (var entry : newsortedMap.entrySet()) {
+		for (var entry : newSortedMap.entrySet()) {
 		   String step = entry.getKey();
 		   result.add(step);
 		}
@@ -109,11 +117,11 @@ public class fileProcessor {
 	public ArrayList<String> stripFile(ArrayList<String> input) {
 		
 
-		File unprocessedstrippedtext = new File("stoptext.txt");
-		if (unprocessedstrippedtext.exists() == true) {
+		File unprocessedStrippedText = new File("stoptext.txt");
+		if (unprocessedStrippedText.exists() == true) {
 
 			try {
-				Scanner myReader = new Scanner(unprocessedstrippedtext);
+				Scanner myReader = new Scanner(unprocessedStrippedText);
 
 				while (myReader.hasNext()) {
 					

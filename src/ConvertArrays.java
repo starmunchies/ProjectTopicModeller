@@ -16,7 +16,7 @@ public class ConvertArrays {
 	 *  
 	 * @return converted
 	 */
-	public String[][] toconvert() {
+	public String[][] toConvert() {
 
 		String[][] converted = new String[fileaddresses.length][11];
 
