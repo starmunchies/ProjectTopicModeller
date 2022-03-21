@@ -51,10 +51,10 @@ public class Control {
 		JButton savefilebutton = new JButton("Save Results");// creating instance of JButton
 		savefilebutton.setBounds(230, 20, 140, 40);// x axis, y axis, width, height
 
-		JLabel l = new JLabel("<html>Hello testing testing <br>1 2 3 seeing how long before</html? ");
-		l.setBounds(0, -100, 400, 350);
+		JLabel mainlabel = new JLabel("<html>Hello testing testing <br>1 2 3 seeing how long before</html? ");
+		mainlabel.setBounds(0, -100, 400, 350);
 
-		mainframe.add(l);// adding button in JFrame
+		mainframe.add(mainlabel);// adding button in JFrame
 		mainframe.add(savefilebutton);// adding button in JFrame
 		mainframe.add(filebutton);// adding button in JFrame
 		mainframe.add(examinebutton);// adding button in JFrame
@@ -68,6 +68,7 @@ public class Control {
 			public void actionPerformed(ActionEvent e) {
 
 				String newfileaddresses[] = fileaddresses.toArray(new String[fileaddresses.size()]);
+				if(newfileaddresses.length>=2) {
 				ConvertArrays convertedarrays = new ConvertArrays(newfileaddresses);
 				String[][] converted = convertedarrays.toconvert();
 
@@ -92,14 +93,18 @@ public class Control {
 				int count = createintersection.getCount();
 				System.out.println(count);
 
-				if (count == 0) {
-					l.setText("There are no common topics between these files");
+				if (count <= 4) {
+					mainlabel.setText("<html>There are no common topics between these files <BR>" + count + "/10 in common </html>");
 					System.out.println("There are no common topics between these files");
 				} else {
-					l.setText("Your files have something in common!!");
+					mainlabel.setText("<html>Your files have something in common!! <BR>" + count +"/10 in common </html>");
 					System.out.println("Your files have something in common!!");
 				}
 
+			}
+				else {
+					JOptionPane.showMessageDialog(null, "You need more than one file in order to compare");
+				}
 			}
 		});
 
@@ -108,16 +113,15 @@ public class Control {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				JFileChooser fileChooser = new JFileChooser();
-				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-				int result = fileChooser.showOpenDialog(mainframe);
+				JFileChooser newfilechooser = new JFileChooser();
+				newfilechooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				int newreturnedresult = newfilechooser.showOpenDialog(mainframe);
 
-				if (result == JFileChooser.APPROVE_OPTION) {
-					File selectedFile = fileChooser.getSelectedFile();
+				if (newreturnedresult == JFileChooser.APPROVE_OPTION)
+				{
+					File selectedFile = newfilechooser.getSelectedFile();
 					fileaddresses.add(selectedFile.getAbsolutePath());
-
 					System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-
 				}
 			}
 		});
