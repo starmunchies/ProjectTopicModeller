@@ -3,7 +3,7 @@ import java.util.*;
 public class ConvertArrays {
 
 	String[] fileaddresses;
-	// public String[][] converted;
+	
 
 	public ConvertArrays(String[] fileaddresses) {
 		this.fileaddresses = fileaddresses;

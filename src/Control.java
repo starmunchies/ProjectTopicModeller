@@ -1,7 +1,10 @@
 // Author: Matthew Russell
-// Code: c20336046
+// Student-Code: c20336046
 // Date Created:09/03/2022
 // Description: honestly just making sure it works atm i'll do this later
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;  
 
@@ -24,40 +27,14 @@ public class Control {
 		// not entirely sure how i will do that
 
 		// need a dictionary to get most top common words
-
-		ConvertArrays convertedarrays = new ConvertArrays(fileaddresses);
-		String[][] converted = convertedarrays.toconvert();
-		// System.out.println(converted[1][2]);
-
-		// this creates an instance of the intersection class
-		// this allows me to put as many transformed files as array strings into the
-		// constructor
-		// which in turn will tell me what they have in common
-
-		// i intend to put the stop words inside of the intersect class to strip the
-		// string array down to size
-
-		// gonna have to construct a 2d arrays of the array created
-		// pass it through and reconstruct it on the other side
-
-		int filecount = fileaddresses.length;
-		intersect createintersection = new intersect(converted, filecount);
-
-		noprefix = createintersection.getIntersection();
-		int count = createintersection.getCount();
-		System.out.println(count);
+		// need to figure out how to sort a dictionary the stream() function exists think i can use that
 		
 
-		if (count == 0) {
-
-			System.out.println("There are no common topics between these files");
-		} else {
-			System.out.println("Your files have something in common!!");
-		}
+		
 
 	}
 	/**
-	 *  this initialises the ui interface such as the buttons the file explorer
+	 *  this initializes the ui interface such as the buttons the file explorer
 	 *  
 	 */
 	public static void getui()
@@ -65,15 +42,70 @@ public class Control {
 		JFrame f=new JFrame("Topic Modeller");//creating instance of JFrame  
 		
 		JButton b=new JButton("Add File");//creating instance of JButton  
-		b.setBounds(50,400,100, 40);//x axis, y axis, width, height 
+		b.setBounds(70,400,100, 40);//x axis, y axis, width, height 
 		
 		JButton a=new JButton("Examine");//creating instance of JButton  
-		a.setBounds(200,400,100, 40);//x axis, y axis, width, height  
-		          
+		a.setBounds(230,400,100, 40);//x axis, y axis, width, height  
+		
+		JButton c=new JButton("Save Results");//creating instance of JButton  
+		c.setBounds(230,20,140, 40);//x axis, y axis, width, height 
+		
+		JLabel l = new JLabel("<html>Hello testing testing <br>1 2 3 seeing how long before</html? ");
+		l.setBounds(0, -100, 400, 350);
+	
+		f.add(l);//adding button in JFrame        
+		f.add(c);//adding button in JFrame          
 		f.add(b);//adding button in JFrame  
 		f.add(a);//adding button in JFrame  
 		f.setSize(400,500);//400 width and 500 height  
 		f.setLayout(null);//using no layout managers  
 		f.setVisible(true);//making the frame visible 
+		
+		a.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				ConvertArrays convertedarrays = new ConvertArrays(fileaddresses);
+				String[][] converted = convertedarrays.toconvert();
+				
+				// System.out.println(converted[1][2]);
+
+				// this creates an instance of the intersection class
+				// this allows me to put as many transformed files as array strings into the
+				// constructor
+				// which in turn will tell me what they have in common
+
+				// i intend to put the stop words inside of the intersect class to strip the
+				// string array down to size
+
+				// gonna have to construct a 2d arrays of the array created
+				// pass it through and reconstruct it on the other side
+
+				int filecount = fileaddresses.length;
+				intersect createintersection = new intersect(converted, filecount);
+
+				noprefix = createintersection.getIntersection();
+				int count = createintersection.getCount();
+				System.out.println(count);
+				
+
+				if (count == 0) {
+
+					System.out.println("There are no common topics between these files");
+				} else {
+					System.out.println("Your files have something in common!!");
+				}
+				
+			}
+		});
+		
+		b.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 }

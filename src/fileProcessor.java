@@ -77,7 +77,7 @@ public class fileProcessor {
 
 	
 	/**
-	 * This essentially gets the passed in dictionaray sorts its it by highest value first and then 
+	 * This essentially gets the passed in dictionary sorts its it by highest value first and then 
 	 * returns and saves it to a linkedhashmap
 	 * @param dictionary
 	 * @return
@@ -85,15 +85,15 @@ public class fileProcessor {
 	public ArrayList<String> getOrder(Map<String, Integer> dictionary) {
 		ArrayList<String> result = new ArrayList<String>();
 		
-		LinkedHashMap<String, Integer> sortedMap = dictionary.entrySet().stream()
+		LinkedHashMap<String, Integer> newsortedMap = dictionary.entrySet().stream()
 				  .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
 				  .collect(Collectors.toMap(Map.Entry::getKey,
 				                            Map.Entry::getValue,
-				                            (e1, e2) -> e1, LinkedHashMap::new));
+				                            (keyname, keyvalues) -> keyname, LinkedHashMap::new));
 		
-		System.out.println(sortedMap.entrySet());
+		System.out.println(newsortedMap.entrySet());
 	
-		for (var entry : sortedMap.entrySet()) {
+		for (var entry : newsortedMap.entrySet()) {
 		   String step = entry.getKey();
 		   result.add(step);
 		}
