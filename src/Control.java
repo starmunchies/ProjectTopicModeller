@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class Control {
-	//public static String[] fileaddresses = {};
+	// public static String[] fileaddresses = {};
 	public static String noprefix = null;
 	static ArrayList<String> fileaddresses = new ArrayList<String>();
 
@@ -39,33 +39,34 @@ public class Control {
 	 * 
 	 */
 	public static void getui() {
-		JFrame f = new JFrame("Topic Modeller");// creating instance of JFrame
+		JFrame mainframe = new JFrame("Topic Modeller");// creating instance of JFrame
+		//f.setLocationRelativeTo(null); 
 
-		JButton b = new JButton("Add File");// creating instance of JButton
-		b.setBounds(70, 400, 100, 40);// x axis, y axis, width, height
+		JButton filebutton = new JButton("Add File");// creating instance of JButton
+		filebutton.setBounds(70, 400, 100, 40);// x axis, y axis, width, height
 
-		JButton a = new JButton("Examine");// creating instance of JButton
-		a.setBounds(230, 400, 100, 40);// x axis, y axis, width, height
+		JButton examinebutton = new JButton("Examine");// creating instance of JButton
+		examinebutton.setBounds(230, 400, 100, 40);// x axis, y axis, width, height
 
-		JButton c = new JButton("Save Results");// creating instance of JButton
-		c.setBounds(230, 20, 140, 40);// x axis, y axis, width, height
+		JButton savefilebutton = new JButton("Save Results");// creating instance of JButton
+		savefilebutton.setBounds(230, 20, 140, 40);// x axis, y axis, width, height
 
 		JLabel l = new JLabel("<html>Hello testing testing <br>1 2 3 seeing how long before</html? ");
 		l.setBounds(0, -100, 400, 350);
 
-		f.add(l);// adding button in JFrame
-		f.add(c);// adding button in JFrame
-		f.add(b);// adding button in JFrame
-		f.add(a);// adding button in JFrame
-		f.setSize(400, 500);// 400 width and 500 height
-		f.setLayout(null);// using no layout managers
-		f.setVisible(true);// making the frame visible
+		mainframe.add(l);// adding button in JFrame
+		mainframe.add(savefilebutton);// adding button in JFrame
+		mainframe.add(filebutton);// adding button in JFrame
+		mainframe.add(examinebutton);// adding button in JFrame
+		mainframe.setSize(400, 500);// 400 width and 500 height
+		mainframe.setLayout(null);// using no layout managers
+		mainframe.setVisible(true);// making the frame visible
 
-		a.addActionListener(new ActionListener() {
+		examinebutton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String newfileaddresses[] = fileaddresses.toArray(new String[fileaddresses.size()]);
 				ConvertArrays convertedarrays = new ConvertArrays(newfileaddresses);
 				String[][] converted = convertedarrays.toconvert();
@@ -80,13 +81,14 @@ public class Control {
 				// i intend to put the stop words inside of the intersect class to strip the
 				// string array down to size
 
-				// gonna have to construct a 2d arrays of the array created
+				// going to have to construct a 2d arrays of the array created
 				// pass it through and reconstruct it on the other side
 
 				int filecount = newfileaddresses.length;
 				intersect createintersection = new intersect(converted, filecount);
 
 				noprefix = createintersection.getIntersection();
+				
 				int count = createintersection.getCount();
 				System.out.println(count);
 
@@ -101,24 +103,21 @@ public class Control {
 			}
 		});
 
-		b.addActionListener(new ActionListener() {
+		filebutton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
 
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-				int result = fileChooser.showOpenDialog(f);
-				
-				if (result == JFileChooser.APPROVE_OPTION) 
-				{
+				int result = fileChooser.showOpenDialog(mainframe);
+
+				if (result == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = fileChooser.getSelectedFile();
-					fileaddresses.add(selectedFile.getAbsolutePath());  
-					
+					fileaddresses.add(selectedFile.getAbsolutePath());
+
 					System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-					
+
 				}
 			}
 		});
