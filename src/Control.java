@@ -14,13 +14,13 @@ import javax.swing.*;
 public class Control {
 	// public static String[] fileaddresses = {};
 	public static String commonwords;
-	static ArrayList<String> fileaddresses = new ArrayList<String>();
+	static ArrayList<String> fileAddresses = new ArrayList<String>();
 	static int count;
-	static boolean onclick = false;
+	static boolean onClick = false;
 
 	public static void main(String[] args) {
 
-		getui();
+		getUI();
 
 		// in order to get an input array I intend to get the user to either drag and
 		// drop a folder into the window
@@ -42,48 +42,48 @@ public class Control {
 	 * this initializes the ui interface such as the buttons the file explorer
 	 * 
 	 */
-	public static void getui() {
-		JFrame mainframe = new JFrame("Topic Modeller");// creating instance of JFrame
+	public static void getUI() {
+		JFrame mainFrame = new JFrame("Topic Modeller");// creating instance of JFrame
 		// f.setLocationRelativeTo(null);
 
-		JButton filebutton = new JButton("Add File");// creating instance of JButton
-		filebutton.setBounds(15, 400, 100, 40);// x axis, y axis, width, height
+		JButton fileButton = new JButton("Add File");// creating instance of JButton
+		fileButton.setBounds(15, 400, 100, 40);// x axis, y axis, width, height
 
-		JButton examinebutton = new JButton("Examine");// creating instance of JButton
-		examinebutton.setBounds(148, 400, 100, 40);// x axis, y axis, width, height
+		JButton examineButton = new JButton("Examine");// creating instance of JButton
+		examineButton.setBounds(148, 400, 100, 40);// x axis, y axis, width, height
 
 		JButton resetButton = new JButton("Reset");// creating instance of JButton
 		resetButton.setBounds(281, 400, 100, 40);// x axis, y axis, width, height
 
-		JButton savefilebutton = new JButton("Save");// creating instance of JButton
-		savefilebutton.setBounds(281, 20, 100, 40);// x axis, y axis, width, height
-		
-		JButton stopfilebutton = new JButton("Strip");// creating instance of JButton
-		stopfilebutton.setBounds(15, 20, 100, 40);// x axis, y axis, width, height
+		JButton saveFileButton = new JButton("Save");// creating instance of JButton
+		saveFileButton.setBounds(281, 20, 100, 40);// x axis, y axis, width, height
 
-		JLabel mainlabel = new JLabel("<html> <br>Files Added:<br>" + fileaddresses + "</html>");
-		mainlabel.setBounds(15, -50, 400, 350);
+		JButton stopFileButton = new JButton("Exclude");// creating instance of JButton
+		stopFileButton.setBounds(15, 20, 100, 40);// x axis, y axis, width, height
 
-		mainframe.add(mainlabel);
-		mainframe.add(savefilebutton);
-		mainframe.add(stopfilebutton);
-		mainframe.add(resetButton);
-		mainframe.add(filebutton);
-		mainframe.add(examinebutton);
-		mainframe.setSize(400, 500);
-		mainframe.setLayout(null);
-		mainframe.setVisible(true);
+		JLabel mainLabel = new JLabel("<html> <br>Files Added:<br>" + fileAddresses + "</html>");
+		mainLabel.setBounds(15, -50, 400, 350);
 
-		examinebutton.addActionListener(new ActionListener() {
+		mainFrame.add(mainLabel);
+		mainFrame.add(saveFileButton);
+		mainFrame.add(stopFileButton);
+		mainFrame.add(resetButton);
+		mainFrame.add(fileButton);
+		mainFrame.add(examineButton);
+		mainFrame.setSize(400, 500);
+		mainFrame.setLayout(null);
+		mainFrame.setVisible(true);
+
+		examineButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String newfileaddresses[] = fileaddresses.toArray(new String[fileaddresses.size()]);
-				if (newfileaddresses.length >= 2) {
-					onclick = true;
-					ConvertArrays convertedarrays = new ConvertArrays(newfileaddresses);
-					String[][] converted = convertedarrays.toConvert();
+				String newFileAddresses[] = fileAddresses.toArray(new String[fileAddresses.size()]);
+				if (newFileAddresses.length >= 2) {
+					onClick = true;
+					ConvertArrays convertedArrays = new ConvertArrays(newFileAddresses);
+					String[][] converted = convertedArrays.toConvert();
 
 					// System.out.println(converted[1][2]);
 
@@ -94,25 +94,25 @@ public class Control {
 
 					// i intend to put the stop words inside of the fileProccessor class to strip
 					// the
-					// string array down to size i.e 10
+					// string array down to size i.e 10S
 
 					// going to have to construct a 2d array of the array created
 					// pass it through and reconstruct it on the other side
 
-					int filecount = newfileaddresses.length;
-					intersect createintersection = new intersect(converted, filecount);
+					int fileCount = newFileAddresses.length;
+					intersect createIntersection = new intersect(converted, fileCount);
 
-					commonwords = createintersection.getIntersection();
+					commonwords = createIntersection.getIntersection();
 
-					count = createintersection.getCount();
+					count = createIntersection.getCount();
 					System.out.println(count);
 
 					if (count <= 3) {
-						mainlabel.setText("<html>There are no common topics between these files <BR>" + count
+						mainLabel.setText("<html>There are no common topics between these files <BR>" + count
 								+ "/10 in common <br>common words:<br>" + commonwords + "</html>");
 						System.out.println("There are no common topics between these files");
 					} else {
-						mainlabel.setText("<html>Your files have something in common!! <BR>" + count
+						mainLabel.setText("<html>Your files have something in common!! <BR>" + count
 								+ "/10 in common <br>common words:<br>" + commonwords + "</html>");
 						System.out.println("Your files have something in common!!");
 					}
@@ -123,23 +123,23 @@ public class Control {
 			}
 		});
 
-		filebutton.addActionListener(new ActionListener() {
+		fileButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				JFileChooser newfilechooser = new JFileChooser();
-				newfilechooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				JFileChooser newFileChooser = new JFileChooser();
+				newFileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 
-				int newreturnedresult = newfilechooser.showOpenDialog(mainframe);
+				int newReturnedResult = newFileChooser.showOpenDialog(mainFrame);
 
-				if (newreturnedresult == JFileChooser.APPROVE_OPTION) {
-					File selectedFile = newfilechooser.getSelectedFile();
-					fileaddresses.add(selectedFile.getAbsolutePath());
+				if (newReturnedResult == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = newFileChooser.getSelectedFile();
+					fileAddresses.add(selectedFile.getAbsolutePath());
 					System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 				}
 
-				mainlabel.setText("<html> <br>Files Added:<br>" + fileaddresses + "</html>");
+				mainLabel.setText("<html> <br>Files Added:<br>" + fileAddresses + "</html>");
 			}
 		});
 
@@ -147,53 +147,52 @@ public class Control {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				onclick = false;
-				fileaddresses.clear();
+				onClick = false;
+				fileAddresses.clear();
 				JOptionPane.showMessageDialog(null, "Files have been cleared from program");
-				mainlabel.setText("<html> <br>Files Added:<br>" + fileaddresses + "</html>");
+				mainLabel.setText("<html> <br>Files Added:<br>" + fileAddresses + "</html>");
 			}
 		});
-		
-		stopfilebutton.addActionListener(new ActionListener() {
+
+		stopFileButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				String newstopword = JOptionPane.showInputDialog(null, "Files have been cleared from program");
+
+				String newStopWord = JOptionPane.showInputDialog(null, "Files have been cleared from program");
 				try {
-					FileWriter newWriter = new FileWriter("stoptext.txt",true);
+					FileWriter newWriter = new FileWriter("stoptext.txt", true);
 					newWriter.write(System.lineSeparator());
-					newWriter.write(newstopword);
+					newWriter.write(newStopWord);
 					newWriter.close();
-					JOptionPane.showMessageDialog(null, "Sucessfully added " + newstopword);
+					JOptionPane.showMessageDialog(null, "Sucessfully added " + newStopWord);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 
-		savefilebutton.addActionListener(new ActionListener() {
+		saveFileButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (onclick == true) {
-					System.out.println(fileaddresses);
+				if (onClick == true) {
+					System.out.println(fileAddresses);
 					System.out.println(count);
 					System.out.println(commonwords);
 					try {
-						saveResult result = new saveResult(fileaddresses, count, commonwords);
+						saveResult result = new saveResult(fileAddresses, count, commonwords);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				}
-				else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Please Examine the files first");
 				}
-				
+
 			}
 		});
 	}
