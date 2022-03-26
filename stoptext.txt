@@ -180,4 +180,3 @@ near
 occurrence
 occur
 plate
-earthquake

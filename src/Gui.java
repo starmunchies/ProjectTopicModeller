@@ -382,6 +382,8 @@ public class Gui {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						System.out.println(onClick);
+						
 						if (onClick == true) {
 							// System.out.println(fileAddresses);
 							// System.out.println(count);
@@ -395,7 +397,9 @@ public class Gui {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-						} else {
+						} 
+						else if(onClick == false) {
+							
 							JOptionPane.showMessageDialog(null, "Please Examine the files first");
 						}
 					}
