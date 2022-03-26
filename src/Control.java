@@ -15,8 +15,8 @@ public class Control {
 	public static void main(String[] args) {
 
 		Gui newgui = new Gui();
-		//newgui.newUi();
-		newgui.getUI();
+		newgui.newUi();
+		//newgui.getUI();
 
 		// in order to get an input array I intend to get the user to either drag and
 		// drop a folder into the window
