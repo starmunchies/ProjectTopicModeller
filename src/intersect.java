@@ -6,6 +6,8 @@ public class intersect {
 
 
 	HashSet<String> intersectionSet;
+	public String[][] inputtedArray;
+	public int filecount;
 	
 	/**
 	 * we pass in the 2d array which holds the top ten words from each file address given
@@ -13,46 +15,52 @@ public class intersect {
 	 * @param inputtedArray
 	 * @param filecount
 	 */
-
 	public intersect(String[][] inputtedArray,int filecount) {
-
-		//this gets the first line to create the first intersection set
-		ArrayList<String> firstSet = new ArrayList<String>();
 		
-		int i=0;
-		while(inputtedArray[0][i] != null)
-		{
-			firstSet.add(inputtedArray[0][i]);
-			//System.out.println(inputtedarray[0][i]);
-			i++;
-		}
+		this.inputtedArray = inputtedArray;
+		this.filecount = filecount;
+		
 
-		// Creating HashSet object for first input array
+	}
+	
+	public void makeIntersect()
+	{
+		//this gets the first line to create the first intersection set
+				ArrayList<String> firstSet = new ArrayList<String>();
+				
+				int i=0;
+				while(inputtedArray[0][i] != null)
+				{
+					firstSet.add(inputtedArray[0][i]);
+					//System.out.println(inputtedarray[0][i]);
+					i++;
+				}
 
-		intersectionSet = new HashSet<>(firstSet);
-		firstSet.clear();
-//
-//		// using retain all function
-//
-		for (int x = 1; x < filecount; x++) {
-//
-			ArrayList<String> nextSet = new ArrayList<String>();
-//			
-			int j =0;
-			
-			while(inputtedArray[x][j] != null)
-			{
-				//System.out.println(inputtedarray[x][j]);
-				nextSet.add(inputtedArray[x][j]);
-				j++;
-			}
-			
-			HashSet<String> finalset = new HashSet<>(nextSet);
-			nextSet.clear();
-			intersectionSet.retainAll(finalset);
-			finalset.clear();
-		}
+				// Creating HashSet object for first input array
 
+				intersectionSet = new HashSet<>(firstSet);
+				firstSet.clear();
+		//
+//				// using retain all function
+		//
+				for (int x = 1; x < filecount; x++) {
+		//
+					ArrayList<String> nextSet = new ArrayList<String>();
+//					
+					int j =0;
+					
+					while(inputtedArray[x][j] != null)
+					{
+						//System.out.println(inputtedarray[x][j]);
+						nextSet.add(inputtedArray[x][j]);
+						j++;
+					}
+					
+					HashSet<String> finalset = new HashSet<>(nextSet);
+					nextSet.clear();
+					intersectionSet.retainAll(finalset);
+					finalset.clear();
+				}
 	}
 	
 	/**

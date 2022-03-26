@@ -8,7 +8,8 @@ public class fileProcessor {
 
 	// still need to look up how to open .docx files
 	// txt files relatively straight forward
-	String file;
+	
+	public String file;
 
 	public fileProcessor(String file) {
 		this.file = file;

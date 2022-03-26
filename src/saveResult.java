@@ -4,8 +4,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class saveResult {
-
-	public saveResult(ArrayList<String> fileAddresses, int count, String commonWords) throws IOException {
+	ArrayList<String> fileAddresses;
+	int count;
+	String commonWords;
+	
+	public saveResult(ArrayList<String> fileAddresses, int count, String commonWords) {
+		this.fileAddresses = fileAddresses;
+		this.count = count;
+		this.commonWords = commonWords;
+		
+	}
+	
+	public void saveToFile() throws IOException 
+	{
+		@SuppressWarnings("unused")
 		File newFile = new File("results.txt");
 		FileWriter newWriter = new FileWriter("results.txt");
 		newWriter.write("File Addresses used:");
@@ -26,5 +38,4 @@ public class saveResult {
 		
 		newWriter.close();
 	}
-
 }
