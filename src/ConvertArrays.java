@@ -3,14 +3,16 @@ import java.util.*;
 public class ConvertArrays {
 
 	String[] fileaddresses;
+	int rangeValue;
 	
 
-	public ConvertArrays(String[] fileaddresses) {
+	public ConvertArrays(String[] fileaddresses,int rangeValue) {
 		this.fileaddresses = fileaddresses;
+		this.rangeValue = rangeValue;
 	}
 
 	/**
-	 *  this converts all of the fileaddresses into arrays
+	 *  this converts all of the file addresses into arrays
 	 *  sends it off to be parsed
 	 *  and then converts them into a 2d array to be used to find the intersection
 	 *  
@@ -18,7 +20,8 @@ public class ConvertArrays {
 	 */
 	public String[][] toConvert() {
 
-		String[][] converted = new String[fileaddresses.length][11];
+		String[][] converted = new String[fileaddresses.length][rangeValue+1];
+		//System.out.println("range of common: "+rangeValue);
 
 		for (int j = 0; j < fileaddresses.length; j++) {
 
@@ -28,9 +31,9 @@ public class ConvertArrays {
 			
 //
 			// String[] parsed = inputArray1;
-			// System.out.println(parsed[1]);
+			 
 
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < rangeValue; i++) {
 				// System.out.println(parsed.get(i));
 					
 					converted[j][i] = parsed.get(i);
