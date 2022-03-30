@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +32,7 @@ public class Gui {
 	}
 
 	public void newUi() {
-		
+
 		JFrame mainFrame = new JFrame("Topic Modeller");// creating instance of JFrame
 		mainFrame.getContentPane().removeAll();
 		mainFrame.repaint();
@@ -40,39 +41,45 @@ public class Gui {
 		Icon stopwordicon = new ImageIcon("icons/neww/blender/addStopWords.PNG");
 		JButton addStopWords = new JButton(stopwordicon);
 		addStopWords.setToolTipText("Add Stop Word");
-		addStopWords.setBounds(0, 616, 200, 200);
+		addStopWords.setBounds(0, 616, 200, 190);
+		addStopWords.setBackground(Color.white);
 		mainFrame.add(addStopWords);
 
 		Icon editIcon = new ImageIcon("icons/neww/blender/editIcon.PNG");
 		JButton editStopWords = new JButton(editIcon);
-		editStopWords.setBounds(204, 616, 200, 200);
+		editStopWords.setBounds(204, 616, 200, 190);
 		editStopWords.setToolTipText("Edit Stop Words");
+		editStopWords.setBackground(Color.white);
 		mainFrame.add(editStopWords);
 
 		// added reset event listener
 		Icon resetIcon = new ImageIcon("icons/neww/blender/reset.PNG");
 		JButton reset = new JButton(resetIcon);
-		reset.setBounds(408, 616, 200, 200);
+		reset.setBounds(408, 616, 200, 190);
 		reset.setToolTipText("Reset Program");
+		reset.setBackground(Color.white);
 		mainFrame.add(reset);
 
 		// added function listener
 		Icon foldericon = new ImageIcon("icons/neww/blender/folder.PNG");
 		JButton addFile = new JButton("Add File", foldericon);
 		addFile.setToolTipText("Add File");
-		addFile.setBounds(616, 0, 200, 200);
+		addFile.setBounds(616, 0, 200, 190);
+		addFile.setBackground(Color.white);
 		mainFrame.add(addFile);
 
 		Icon icon = new ImageIcon("icons/neww/blender/searchbutton.PNG");
 		JButton examineFiles = new JButton("search", icon);
 		examineFiles.setToolTipText("Examine Files");
 		examineFiles.setBounds(616, 204, 200, 200);
+		examineFiles.setBackground(Color.white);
 		mainFrame.add(examineFiles);
 
 		Icon deleteicon = new ImageIcon("icons/neww/blender/delete.PNG");
 		JButton deletePrevious = new JButton(deleteicon);
 		deletePrevious.setToolTipText("Delete Last Added");
 		deletePrevious.setBounds(616, 408, 200, 200);
+		deletePrevious.setBackground(Color.white);
 		mainFrame.add(deletePrevious);
 
 		// make an App drawer to put all the other icons in so it doesn't look like a
@@ -82,9 +89,11 @@ public class Gui {
 		JButton drawer = new JButton(drawerIcon);
 		drawer.setToolTipText("App Drawer");
 		drawer.setBounds(616, 616, 200, 200);
+		drawer.setBackground(Color.white);
 		mainFrame.add(drawer);
 
 		mainFrame.setSize(830, 830);
+		mainFrame.setBackground(Color.LIGHT_GRAY);
 		mainFrame.setLayout(null);
 		mainFrame.setVisible(true);
 		getFilesUi(mainFrame);
@@ -103,7 +112,7 @@ public class Gui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				onClick = false;
-				
+
 				fileAddresses.clear();
 				JOptionPane.showMessageDialog(null, "Files have been cleared from program");
 				removeFilesUi(mainFrame);
@@ -178,12 +187,12 @@ public class Gui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				JOptionPane.showMessageDialog(null,
 						"Sucessfully deleted " + fileAddresses.get(fileAddresses.size() - 1));
 				fileAddresses.remove(fileAddresses.size() - 1);
 				removeFilesUi(mainFrame);
-				//getFilesUi(mainFrame);
+				// getFilesUi(mainFrame);
 				System.out.println(fileAddresses);
 			}
 
@@ -201,18 +210,21 @@ public class Gui {
 				JButton newRange = new JButton(rangeIcon);
 				newRange.setToolTipText("Select Range");
 				newRange.setBounds(0, 0, 200, 200);
+				newRange.setBackground(Color.white);
 				mainFrame.add(newRange);
 
 				Icon saveIcon = new ImageIcon("icons/neww/blender/save.PNG");
 				JButton saveFile = new JButton(saveIcon);
 				saveFile.setBounds(204, 0, 200, 200);
 				saveFile.setToolTipText(" Save File");
+				saveFile.setBackground(Color.white);
 				mainFrame.add(saveFile);
 
 				Icon backButtonIcon = new ImageIcon("icons/neww/blender/backButton.PNG");
 				JButton backButton = new JButton(backButtonIcon);
 				backButton.setBounds(408, 0, 200, 200);
 				backButton.setToolTipText("Return To Home");
+				backButton.setBackground(Color.white);
 				mainFrame.add(backButton);
 
 				backButton.addActionListener(new ActionListener() {
@@ -234,9 +246,8 @@ public class Gui {
 						System.out.println(onClick);
 
 						if (onClick == true) {
-							// System.out.println(fileAddresses);
-							// System.out.println(count);
-							// System.out.println(commonwords);
+							
+							
 							saveResult result = new saveResult(fileAddresses, count, commonwords);
 
 							try {
@@ -258,49 +269,7 @@ public class Gui {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						JFrame sliderframe = new JFrame("Slider");
-
-						sliderframe.setSize(400, 500);
-						sliderframe.setLayout(null);
-						sliderframe.setVisible(true);
-
-						JSlider newSlider = new JSlider(0, 30, 10);
-						newSlider.setBounds(60, 50, 260, 40);
-						newSlider.setPaintTrack(true);
-						newSlider.setPaintTicks(true);
-						newSlider.setPaintLabels(true);
-						newSlider.setMajorTickSpacing(10);
-						newSlider.setMinorTickSpacing(1);
-						sliderframe.add(newSlider);
-
-						JLabel viewResult = new JLabel();
-						sliderframe.add(viewResult);
-						viewResult.setText("Value is: " + newSlider.getValue());
-						viewResult.setBounds(160, 60, 200, 100);
-
-						JButton submitButton = new JButton("submit");
-						submitButton.setBounds(140, 200, 100, 40);
-						sliderframe.add(submitButton);
-
-						newSlider.addChangeListener(new ChangeListener() {
-							@Override
-							public void stateChanged(ChangeEvent event) {
-
-								viewResult.setText("Value is: " + newSlider.getValue());
-
-							}
-						});
-
-						submitButton.addActionListener(new ActionListener() {
-
-							@Override
-							public void actionPerformed(ActionEvent e) {
-
-								rangeValue = newSlider.getValue();
-								sliderframe.dispose();
-							}
-						});
-
+						sliderUi();
 					}
 				});
 
@@ -309,30 +278,80 @@ public class Gui {
 
 	}
 
+	public void sliderUi() {
+		JFrame sliderframe = new JFrame("Slider");
+
+		sliderframe.setSize(400, 500);
+		sliderframe.setLayout(null);
+		sliderframe.setVisible(true);
+
+		JSlider newSlider = new JSlider(0, 30, 10);
+		newSlider.setBounds(60, 50, 260, 40);
+		newSlider.setPaintTrack(true);
+		newSlider.setPaintTicks(true);
+		newSlider.setPaintLabels(true);
+		newSlider.setMajorTickSpacing(10);
+		newSlider.setMinorTickSpacing(1);
+		sliderframe.add(newSlider);
+
+		JLabel viewResult = new JLabel();
+		sliderframe.add(viewResult);
+		viewResult.setText("Value is: " + newSlider.getValue());
+		viewResult.setBounds(160, 60, 200, 100);
+
+		JButton submitButton = new JButton("submit");
+		submitButton.setBounds(140, 200, 100, 40);
+		sliderframe.add(submitButton);
+
+		newSlider.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent event) {
+
+				viewResult.setText("Value is: " + newSlider.getValue());
+
+			}
+		});
+
+		submitButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				rangeValue = newSlider.getValue();
+				sliderframe.dispose();
+			}
+		});
+	}
+
 	public void getFilesUi(JFrame mainFrame) {
 		int totalFiles = fileAddresses.size();
 		// System.out.println(fileAddresses.size());
 		int ycount = 40;
 		JButton[] totalButtons = new JButton[totalFiles];
+		JLabel heading = new JLabel("graphic design is my passion");
+		heading.setBounds(204, 0, 400, 30);
+		mainFrame.add(heading);
 
 		// mainFrame.getContentPane().removeAll();
 		// mainFrame.repaint();
 		for (int i = 0; i < totalFiles; i++) {
-			
+
 			final int index = i; // i is outside the scope of event listener declaring as final fixes this
-			//System.out.println(i);
-			totalButtons[i] = new JButton(fileAddresses.get(i)+ " " + i);
+			// System.out.println(i);
+			totalButtons[i] = new JButton("File: "+i+" "+fileAddresses.get(i));
 			totalButtons[i].setBounds(20, ycount, 590, 40);
+			totalButtons[i].setBackground(Color.white);
+			
 			ycount += 50;
 			mainFrame.add(totalButtons[i]);
 			mainFrame.repaint();
-			
+
 			totalButtons[i].addActionListener(new ActionListener() {
 
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	            	
-	            	File File = new File(fileAddresses.get(index));
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+					File File = new File(fileAddresses.get(index));
 
 					try {
 						Desktop.getDesktop().edit(File);
@@ -340,40 +359,35 @@ public class Gui {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-	               
-	            }
-	        });
+
+				}
+			});
 		}
-		
+
 		System.out.println("total " + totalButtons.length);
 	}
 
 	public void removeFilesUi(JFrame mainFrame) {
-		//int totalFiles = fileAddresses.size();
+		// int totalFiles = fileAddresses.size();
 		// System.out.println(fileAddresses.size());
 
-		//JButton[] totalButtons = new JButton[totalFiles];
+		// JButton[] totalButtons = new JButton[totalFiles];
 		mainFrame.dispose();
-		
+
 		newUi();
-		
-		
-		
 
 	}
-	
+
 	public void examineFilesUi() {
-	
-		
+
 		String newFileAddresses[] = fileAddresses.toArray(new String[fileAddresses.size()]);
 		if (newFileAddresses.length >= 2) {
 			onClick = true;
-			
+
 			JFrame resultFrame = new JFrame("Modeller Results");// creating instance of JFrame
 			resultFrame.setSize(400, 400);
 			resultFrame.setLayout(null);
 			resultFrame.setVisible(true);
-			
 
 			ConvertArrays convertedArrays = new ConvertArrays(newFileAddresses, rangeValue);
 			String[][] converted = convertedArrays.toConvert();
@@ -394,7 +408,7 @@ public class Gui {
 
 			int fileCount = newFileAddresses.length;
 			intersect createIntersection = new intersect(converted, fileCount);
-			
+
 			createIntersection.makeIntersect();
 
 			commonwords = createIntersection.getIntersection();
@@ -415,9 +429,6 @@ public class Gui {
 		} else {
 			JOptionPane.showMessageDialog(null, "You need more than one file in order to compare");
 		}
-		
-		
-		
 
 	}
 
