@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -31,7 +32,7 @@ public class Gui {
 	JFrame mainFrame;
 	JButton[] totalButtons;
 	/**
-	 * not in use as no variables are passed to it
+	 * Constructor not in use as no variables are passed to it
 	 * may be used for error check in the future
 	 */
 	public Gui() {
@@ -434,7 +435,9 @@ public class Gui {
 		JButton[] totalButtons = new JButton[totalFiles];
 		JButton[] DeletetotalButtons = new JButton[totalFiles];
 		JLabel heading = new JLabel("Files Added:");
-		heading.setBounds(204, 0, 400, 30);
+		
+		heading.setFont(new Font("Verdana", Font.PLAIN, 18));
+		heading.setBounds(20, 0, 400, 30);
 		mainFrame.add(heading);
 
 		// mainFrame.getContentPane().removeAll();
