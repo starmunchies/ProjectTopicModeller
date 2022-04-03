@@ -4,12 +4,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class fileProcessor {
-	// return top ten using a sorting algorithm prolly the best bet
+	// return top ten using a sorting algorithm probably the best bet
 
-	// still need to look up how to open .docx files
+	
 	// txt files relatively straight forward
 	
 	public String file;
+	public String[] specialChars = {".",",","[","]","(",")","%","&","?","/"};
 
 	public fileProcessor(String file) {
 		this.file = file;
@@ -37,17 +38,13 @@ public class fileProcessor {
 				Scanner myReader = new Scanner(unprocessed);
 
 				while (myReader.hasNext()) {
+					
 					String check = myReader.next();
-					// get rid of special characters
-					check = check.replace(".", "");
-					check = check.replace(",", "");
-					check = check.replace("[", "");
-					check = check.replace("]", "");
-					check = check.replace("(", "");
-					check = check.replace(")", "");
-					check = check.replace("%", "");
-					check = check.replace("&", "");
-					check = check.replace("?", "");
+					// get rid of special chars
+					for(String i: specialChars)
+					{
+						check = check.replace(i, "");
+					}
 
 					fileOutput.add(check.toLowerCase());
 					
@@ -87,7 +84,7 @@ public class fileProcessor {
 	
 	/**
 	 * This essentially gets the passed in dictionary sorts its it by highest value first and then 
-	 * returns and saves it to a linkedhashmap
+	 * returns and saves it to a linked hash-map
 	 * @param dictionary
 	 * @return
 	 */
@@ -108,6 +105,7 @@ public class fileProcessor {
 		}
 		return result;
 	}
+	
 	/**
 	 * this strips the array of any common words
 	 * it does this by opening a stoptext.txt file and comparing it to see if its there
@@ -148,6 +146,7 @@ public class fileProcessor {
 		// TODO Auto-generated method stub
 
 	}
+	
 	/**
 	 * This gets the word frequency from the array list
 	 * once a word is found to be a duplicate we just add 1 to the value in the dictionary

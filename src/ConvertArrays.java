@@ -3,9 +3,10 @@ import java.util.*;
 public class ConvertArrays {
 
 	String[] fileaddresses;
+	ArrayList<String> allStrings = new ArrayList<String>();
 	int rangeValue;
 	
-
+	//constructor that sets the variables that are passed through
 	public ConvertArrays(String[] fileaddresses,int rangeValue) {
 		this.fileaddresses = fileaddresses;
 		this.rangeValue = rangeValue;
@@ -21,6 +22,7 @@ public class ConvertArrays {
 	public String[][] toConvert() {
 
 		String[][] converted = new String[fileaddresses.length][rangeValue+1];
+		allStrings.clear();
 		//System.out.println("range of common: "+rangeValue);
 
 		for (int j = 0; j < fileaddresses.length; j++) {
@@ -28,6 +30,7 @@ public class ConvertArrays {
 			fileProcessor file = new fileProcessor(fileaddresses[j]);
 			
 			ArrayList<String> parsed = file.getFile();
+			allStrings.addAll(parsed);
 			
 //
 			// String[] parsed = inputArray1;
