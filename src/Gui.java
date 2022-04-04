@@ -11,10 +11,23 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
+
 
 
   
-
+/**
+ * Creates the UI of the whole program
+ * uses a range of static buttons and dynamic buttons and functions
+ * UI influenced by the old xbox 360 tiles
+ * 
+ * @author Matthew
+ *
+ */
 public class Gui {
 	// where common words found from the examine function is placed
 	// left public so any other function within gui can use it
@@ -79,7 +92,7 @@ public class Gui {
 		addFile.setBounds(616, 0, 200, 200);
 		addFile.setBackground(Color.white);
 		mainFrame.add(addFile);
-
+		// added examine button
 		Icon icon = new ImageIcon("icons/searchbutton.PNG");
 		JButton examineFiles = new JButton("search", icon);
 		examineFiles.setToolTipText("Examine Files");
@@ -482,6 +495,7 @@ public class Gui {
 
 				}
 			});
+			
 			/**
 			 * dynamic function that creates a function that deletes a specific file
 			 * tied to whichever file button that was also created dynamically
@@ -533,7 +547,7 @@ public class Gui {
 			onClick = true;
 			
 			JFrame resultFrame = new JFrame("Modeller Results");// creating instance of JFrame
-			resultFrame.setSize(400, 400);
+			resultFrame.setSize(400, 600);
 			resultFrame.setLayout(null);
 			resultFrame.setVisible(true);
 
@@ -565,8 +579,26 @@ public class Gui {
 			mainLabel.setBounds(10, 10, 300, 100);
 			resultFrame.add(mainLabel);
 			
+			DefaultPieDataset dataSet = new DefaultPieDataset( );
+			dataSet.setValue( "In Common" , count );  
+		    dataSet.setValue( "Not In Common" , rangeValue );
+		    
+		    JFreeChart chart = ChartFactory.createPieChart(      
+		            "Commanality",   // chart title 
+		            dataSet,          // data    
+		            true,             // include legend   
+		            true, 
+		            false);
+		    
+		    ChartPanel pichart = new ChartPanel( chart );
+		    pichart.setBounds(0,210,400,300);
+		 
+		    resultFrame.add(pichart);
+		    resultFrame.setResizable(false);
+		    
+			
 
-			if (((double)count/rangeValue)*100 <= 40) {
+			if (((double)count/rangeValue)*100 <= 20) {
 			mainLabel.setText("<html>There are no common topics between these files <BR>" + ((double)count/rangeValue)*100
 						+ "% in common <br>common words:<br>" + commonwords + "</html>");
 				System.out.println("There are no common topics between these files");

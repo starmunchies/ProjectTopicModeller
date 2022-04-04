@@ -2,16 +2,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * class that processes the text file
+ * strips it for the top common words and returns it
+ * @author Matthew
+ *
+ */
 public class fileProcessor {
-	// return top ten using a sorting algorithm probably the best bet
 
-	
-	// txt files relatively straight forward
 	
 	public String file;
 	public String[] specialChars = {".",",","[","]","(",")","%","&","?","/"};
-
+	/**
+	 * constructor that sets which file is being used
+	 * 
+	 * @param file
+	 */
 	public fileProcessor(String file) {
 		this.file = file;
 	}
@@ -20,6 +26,7 @@ public class fileProcessor {
 	 * this opens the file creates an array list
 	 * goes through the multiple functions to clean it and sort it in order 
 	 * of word frequency and returns the value
+	 * 
 	 * @return result
 	 */
 	public ArrayList<String> getFile() {
@@ -85,14 +92,29 @@ public class fileProcessor {
 	/**
 	 * This essentially gets the passed in dictionary sorts its it by highest value first and then 
 	 * returns and saves it to a linked hash-map
+	 * 
+	 * Found a handy way to sort a a hash-map thanks to the stream method 
+	 * implement in java 8 and above 
+	 * 
+	 * reference: https://www.tutorialspoint.com/java8/java8_streams.htm
+	 * Date-Accessed: 03/04/2022 13:19
+	 * 
+	 * reference: https://stackoverflow.com/questions/42065615/how-to-sort-values-in-hashmap-by-using-treeset
+	 * Date-Accessed: 03/04/2022 16:39
+	 * 
 	 * @param dictionary
-	 * @return
+	 * 
+	 * @return result
 	 */
 	public ArrayList<String> getOrder(Map<String, Integer> dictionary) {
 		ArrayList<String> result = new ArrayList<String>();
-		
+		// create a linked hash-map from a streamed hash-map called dictionary
 		LinkedHashMap<String, Integer> newSortedMap = dictionary.entrySet().stream()
+				// we sort it by using the compare by value method and reverse to order
+				// so that the highest is first
 				  .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+				  // we then collect this and assign the word as the key and assign it 
+				  // its value
 				  .collect(Collectors.toMap(Map.Entry::getKey,
 				                            Map.Entry::getValue,
 				                            (keyname, keyvalues) -> keyname, LinkedHashMap::new));
@@ -111,7 +133,8 @@ public class fileProcessor {
 	 * it does this by opening a stoptext.txt file and comparing it to see if its there
 	 * if its there it removes it
 	 * @param input
-	 * @return
+	 * 
+	 * @return input
 	 */
 	public ArrayList<String> stripFile(ArrayList<String> input) {
 		
@@ -151,7 +174,8 @@ public class fileProcessor {
 	 * This gets the word frequency from the array list
 	 * once a word is found to be a duplicate we just add 1 to the value in the dictionary
 	 * @param input
-	 * @return
+	 * 
+	 * @return dictionary
 	 */
 	public Map<String,Integer> wordFrequency(ArrayList<String> input) {
 

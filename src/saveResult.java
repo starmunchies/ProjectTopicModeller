@@ -2,7 +2,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * Saves the results of ExamineFile function to a file
+ * of a users choosing
+ * @author Matthew
+ *
+ */
 public class saveResult {
 	private ArrayList<String> fileAddresses;
 	private int count;

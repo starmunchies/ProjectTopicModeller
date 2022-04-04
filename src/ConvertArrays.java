@@ -1,5 +1,11 @@
 import java.util.*;
-
+/**
+ * converts multiple array lists into a 2d array
+ * for use in other classes going foward
+ *  
+ * @author Matthew
+ *
+ */
 public class ConvertArrays {
 
 	String[] fileaddresses;
