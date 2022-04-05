@@ -44,7 +44,36 @@ of a users choosing
 
 
 ## Core Functionality
+
+### Add Stop Words
+### Find Frequency of words per file
+### Examine Files
+### identify similarities
+### Save File
+
 ## Optional Functionality
+
+### Enhanced GUI
+### Range Slider
+### Dynamic Delete
+### Delete Last File
+### Reset Program
+### App Drawer
+### Use file Chooser for selecting and saving 
+
+
+
+
 ## Foresight
+overall if I had more time I would have liked to implement a lemmatisation that cuts down words to there
+root Stanford.edu has a library for this.
+
+I would also like to do more with java FX instead of java swing I feel like I could get a better and 
+cleaner graphical user interface.
+
+On top of this would be a total code restructuring of how I implement my classes. I Feel the way
+I use them isn't exactly the main way of doing it 
+
+
 ## Video
 https://youtu.be/qV9P0NxMRXs
