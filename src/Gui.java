@@ -587,6 +587,15 @@ public class Gui {
 			mainLabel.setBounds(10, 10, 300, 100);
 			resultFrame.add(mainLabel);
 			
+			/*
+			 * used a chart library called Jchart
+			 * Reference: https://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/plot/PiePlot.html
+			 * 
+			 * this works with the swing library and allowed me to implement a pi chart
+			 * easily
+			 * 
+			 * 
+			 */
 			// we create a data set for the pi chart
 			DefaultPieDataset dataSet = new DefaultPieDataset( );
 			// pass count of words that were in common

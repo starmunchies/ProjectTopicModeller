@@ -21,6 +21,7 @@ public class Intersect {
 	 * @param inputtedArray
 	 * @param filecount
 	 */
+	
 	public Intersect(String[][] inputtedArray,int filecount) {
 		
 		this.inputtedArray = inputtedArray;
