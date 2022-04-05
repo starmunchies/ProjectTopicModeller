@@ -54,6 +54,7 @@ of a users choosing
 ## Optional Functionality
 
 ### Enhanced GUI
+### Summary button on click
 ### Range Slider
 ### Dynamic Delete
 ### Delete Last File
