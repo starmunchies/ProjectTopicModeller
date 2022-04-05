@@ -1,7 +1,7 @@
 import java.util.*;
 /**
  * converts multiple array lists into a 2d array
- * for use in other classes going foward
+ * for use in other classes going forward
  *  
  * @author Matthew
  *
@@ -33,12 +33,11 @@ public class ConvertArrays {
 
 		for (int j = 0; j < fileaddresses.length; j++) {
 
-			fileProcessor file = new fileProcessor(fileaddresses[j]);
+			FileProcessor file = new FileProcessor(fileaddresses[j]);
 			
 			ArrayList<String> parsed = file.getFile();
 			allStrings.addAll(parsed);
 			
-//
 			// String[] parsed = inputArray1;
 			 
 

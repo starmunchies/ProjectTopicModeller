@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -15,11 +16,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
-
-
-
-
-  
+ 
 /**
  * Creates the UI of the whole program
  * uses a range of static buttons and dynamic buttons and functions
@@ -44,9 +41,11 @@ public class Gui {
 	// makes the main window public to the class so all functions can use it
 	JFrame mainFrame;
 	JButton[] totalButtons;
+	
 	/**
 	 * Constructor not in use as no variables are passed to it
-	 * may be used for error check in the future
+	 * may be used for error check in the future or for passing system variables 
+	 * like os name or screen size for a more streamlined view
 	 */
 	public Gui() {
 
@@ -78,6 +77,7 @@ public class Gui {
 		mainFrame.add(editStopWords);
 
 		// added reset event listener
+		//this will reset the entire program
 		Icon resetIcon = new ImageIcon("icons/reset.PNG");
 		JButton reset = new JButton(resetIcon);
 		reset.setBounds(408, 612, 200, 190);
@@ -86,12 +86,14 @@ public class Gui {
 		mainFrame.add(reset);
 
 		// added function listener
+		// lets you add a file to be checked
 		Icon foldericon = new ImageIcon("icons/folder.PNG");
 		JButton addFile = new JButton("Add File", foldericon);
 		addFile.setToolTipText("Add File");
 		addFile.setBounds(616, 0, 200, 200);
 		addFile.setBackground(Color.white);
 		mainFrame.add(addFile);
+		
 		// added examine button
 		Icon icon = new ImageIcon("icons/searchbutton.PNG");
 		JButton examineFiles = new JButton("search", icon);
@@ -107,8 +109,7 @@ public class Gui {
 		deletePrevious.setBackground(Color.white);
 		mainFrame.add(deletePrevious);
 
-		// make an App drawer to put all the other icons in so it doesn't look like a
-		// mess
+		// make an App-drawer to put all the other icons in so it doesn't look like a mess
 		// added function listener with sub functions embedded
 		Icon drawerIcon = new ImageIcon("icons/appdrawer.PNG");
 		JButton drawer = new JButton(drawerIcon);
@@ -116,7 +117,9 @@ public class Gui {
 		drawer.setBounds(616, 612, 200, 200);
 		drawer.setBackground(Color.white);
 		mainFrame.add(drawer);
-
+		
+		
+		// this sets the size of the frame and makes it visible
 		mainFrame.setSize(830, 830);
 		mainFrame.setBackground(Color.LIGHT_GRAY);
 		mainFrame.setLayout(null);
@@ -137,11 +140,12 @@ public class Gui {
 				examineFilesUi();
 			}
 		});
+		
 		/**
 		 * this deletes all the addresses in fileAddresses
 		 * and updates the UI accordingly
+		 *
 		 */
-
 		reset.addActionListener(new ActionListener() {
 
 			@Override
@@ -156,8 +160,9 @@ public class Gui {
 			}
 		});
 		
+		
 		/**
-		 * this opens the desktops default text editor so the user can edit and delete 
+		 * this opens the desktop default text editor so the user can edit and delete 
 		 * the words with a familiar interface that they are used to
 		 */
 		editStopWords.addActionListener(new ActionListener() {
@@ -176,7 +181,7 @@ public class Gui {
 			}
 		});
 		/**
-		 * function that allows you to add stop words to the list
+		 * function that allows you to add stop words to the stopword list
 		 */
 		addStopWords.addActionListener(new ActionListener() {
 
@@ -214,23 +219,24 @@ public class Gui {
 				newFileChooser.setFileHidingEnabled(true);
 
 				newFileChooser.setFileFilter(textfilter);
-				// newFileChooser.getChoosableFileFilters(textfilter);
 
 				int newReturnedResult = newFileChooser.showOpenDialog(mainFrame);
-
+				// if yes is chosen from the file chooser do the below action 
+				
 				if (newReturnedResult == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = newFileChooser.getSelectedFile();
 
 					fileAddresses.add(selectedFile.getAbsolutePath());
 					System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 				}
+				
+				// this adds the files dynamically to the mainFrame as buttons
 				getFilesUi(mainFrame);
-
-				// mainLabel.setText("<html> <br>Files Added:<br>" + fileAddresses + "</html>");
 			}
 		});
 		/**
 		 * deletes the last file address in the array list
+		 * and updates the UI
 		 */
 		deletePrevious.addActionListener(new ActionListener() {
 
@@ -246,9 +252,11 @@ public class Gui {
 			}
 
 		});
+		
 		/**
-		 * this in an appdrawer this is needed as i cant fit all the buttons on the one frame
-		 * the can click on this appdrawer and see a range of many more options
+		 * this in an appdrawer this is needed as i can't fit all the buttons on the one frame
+		 * they can click on this appdrawer which will rewrite the current frame with the appdrawer
+		 * page
 		 */
 
 		drawer.addActionListener(new ActionListener() {
@@ -273,6 +281,7 @@ public class Gui {
 				saveFile.setToolTipText(" Save File");
 				saveFile.setBackground(Color.white);
 				mainFrame.add(saveFile);
+				
 				//creates a static button in jframe for a back button
 				Icon backButtonIcon = new ImageIcon("icons/backButton.PNG");
 				JButton backButton = new JButton(backButtonIcon);
@@ -296,6 +305,7 @@ public class Gui {
 						mainFrame.dispose();
 					}
 				});
+				
 				/**
 				 * adds a listener to the save file button
 				 * 
@@ -308,7 +318,7 @@ public class Gui {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						//System.out.println(onClick);
-
+						//makes sure the examine function button was called before executing
 						if (onClick == true) {
 							
 							//creates a pop up frame
@@ -321,16 +331,17 @@ public class Gui {
 							FileNameExtensionFilter textfilter = new FileNameExtensionFilter("Text Files", "txt",".");
 							saveFileChooser.setFileFilter(textfilter);
 							saveFileChooser.setFileHidingEnabled(true);
-							//adds the saveFileChooser to the secondar frame
-							int userSelection = saveFileChooser.showSaveDialog(secondaryFrame);
+							
+							//adds the saveFileChooser to the secondary frame
+							int returnchooser = saveFileChooser.showSaveDialog(secondaryFrame);
 							
 							 // if the user selects or types in a file location and submits
 							
-							if (userSelection == JFileChooser.APPROVE_OPTION) {
+							if (returnchooser == JFileChooser.APPROVE_OPTION) {
 							    File fileToSave = saveFileChooser.getSelectedFile();
 							    System.out.println("Save as file: " + fileToSave.getAbsolutePath());
 							    
-							    saveResult result = new saveResult(fileAddresses,count,rangeValue ,commonwords,fileToSave.getAbsolutePath());
+							    SaveResult result = new SaveResult(fileAddresses,count,rangeValue ,commonwords,fileToSave.getAbsolutePath()+".txt");
 
 								try {
 									result.saveToFile();
@@ -369,6 +380,7 @@ public class Gui {
 		});
 
 	}
+	
 	/**
 	 * called when the user selects to change the range.
 	 * the range updates the amount of common words that are checked for 
@@ -547,63 +559,66 @@ public class Gui {
 			onClick = true;
 			
 			JFrame resultFrame = new JFrame("Modeller Results");// creating instance of JFrame
-			resultFrame.setSize(400, 600);
+			resultFrame.setSize(400, 480);
 			resultFrame.setLayout(null);
 			resultFrame.setVisible(true);
-
+			
+			// Instantiates the ConvertArrays class and passes the file address
+			// and the range value through it
 			ConvertArrays convertedArrays = new ConvertArrays(newFileAddresses, rangeValue);
+			// we convert the files and save them to a 2d array
 			String[][] converted = convertedArrays.toConvert();
 			
-			// this creates an instance of the intersection class
-			// this allows me to put as many transformed files as array strings into the
-			// constructor
-			// which in turn will tell me what they have in common
-
-			// i intend to put the stop words inside of the fileProccessor class to strip
-			// the
-			// string array down to size i.e 10S
-
-			// going to have to construct a 2d array of the array created
-			// pass it through and reconstruct it on the other side
-
+	
+			// we get a count of the amount of files in the String Array
 			int fileCount = newFileAddresses.length;
-			intersect createIntersection = new intersect(converted, fileCount);
-
+			// we instantiate the intersect Class which will find the commonalities 
+			// through intersections
+			Intersect createIntersection = new Intersect(converted, fileCount);
+			// we use the make intersection method 
 			createIntersection.makeIntersect();
-
+			// we save the results to common words variable
 			commonwords = createIntersection.getIntersection();
-
+			// we get the count of common words from create
 			count = createIntersection.getCount();
-			//System.out.println((((double)count/rangeValue)*100));
+			
+			
 			JLabel mainLabel = new JLabel();
 			mainLabel.setBounds(10, 10, 300, 100);
 			resultFrame.add(mainLabel);
 			
+			// we create a data set for the pi chart
 			DefaultPieDataset dataSet = new DefaultPieDataset( );
-			dataSet.setValue( "In Common" , count );  
+			// pass count of words that were in common
+			dataSet.setValue( "In Common" , count ); 
+			// pass range that was set
 		    dataSet.setValue( "Not In Common" , rangeValue );
 		    
+		    // add the data set to the chart
 		    JFreeChart chart = ChartFactory.createPieChart(      
-		            "Commanality",   // chart title 
+		            "Word Frequency",   // chart title 
 		            dataSet,          // data    
 		            true,             // include legend   
 		            true, 
 		            false);
-		    
+		    // instantiate the chart panel
 		    ChartPanel pichart = new ChartPanel( chart );
-		    pichart.setBounds(0,210,400,300);
-		 
+		    pichart.setBounds(0,130,400,300);
+		    // add the pi chart to the frame
 		    resultFrame.add(pichart);
 		    resultFrame.setResizable(false);
 		    
+		    // this is used to set the decimal formating to 2 decimal spaces
+		    final DecimalFormat rounding = new DecimalFormat("#.##");
 			
-
+		    // if there are more than 20 percent common words
 			if (((double)count/rangeValue)*100 <= 20) {
-			mainLabel.setText("<html>There are no common topics between these files <BR>" + ((double)count/rangeValue)*100
+			mainLabel.setText("<html>There are no common topics between these files <BR> " + rounding.format(((double)count/rangeValue)*100)
 						+ "% in common <br>common words:<br>" + commonwords + "</html>");
 				System.out.println("There are no common topics between these files");
 			} else {
-				mainLabel.setText("<html>Your files have something in common!! <BR>" +((double)count/rangeValue)*100
+				// otherwise display this 
+				mainLabel.setText("<html>Your files have something in common!! <BR> " +rounding.format(((double)count/rangeValue)*100)
 					+ "% in common <br>common words:<br>" + commonwords + "</html>");
 				System.out.println("Your files have something in common!!");
 			}

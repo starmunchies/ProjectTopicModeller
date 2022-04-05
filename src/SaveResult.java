@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Matthew
  *
  */
-public class saveResult {
+public class SaveResult {
 	private ArrayList<String> fileAddresses;
 	private int count;
 	private int rangeValue;
@@ -56,7 +56,7 @@ public class saveResult {
 	}
 
 	//class constructor sets up variables
-	public saveResult(ArrayList<String> fileAddresses, int count,int rangeValue, String commonWords,String filePath) {
+	public SaveResult(ArrayList<String> fileAddresses, int count,int rangeValue, String commonWords,String filePath) {
 	
 		setFileAddresses(fileAddresses);
 		setCount(count);
