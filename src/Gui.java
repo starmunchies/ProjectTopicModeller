@@ -612,7 +612,7 @@ public class Gui {
 		    final DecimalFormat rounding = new DecimalFormat("#.##");
 			
 		    // if there are more than 20 percent common words
-			if (((double)count/rangeValue)*100 <= 20) {
+			if (((double)count/rangeValue)*100 < 19) {
 			mainLabel.setText("<html>There are no common topics between these files <BR> " + rounding.format(((double)count/rangeValue)*100)
 						+ "% in common <br>common words:<br>" + commonwords + "</html>");
 				System.out.println("There are no common topics between these files");
